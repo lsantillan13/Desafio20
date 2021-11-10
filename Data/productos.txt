@@ -1,0 +1,7 @@
+[
+	{
+		"title": "Producto 0",
+		"price": "",
+		"image": ""
+	}
+]
