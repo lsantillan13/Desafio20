@@ -1,9 +1,8 @@
-/*Typescript*/
-// let arr = require('../server.ts');
-
-/*Js*/
 let arr = require('../server.js');
-
+const path = require('path');
+const fs = require('fs');
+/*FAKERJS*/
+const generador = require('../faker/generator/faker.js');
 let id = 0;
 module.exports = class Rutas {
     constructor(id, productos) {}
@@ -53,4 +52,40 @@ module.exports = class Rutas {
       let msj = {Productos: fakeAPI(), listExist: arr.length != 0 ? true : false}
       res.render('main', msj);
     };
+    
+    faker(req, res){
+    let productos = [];
+        const cant = req.query.cant || 10;
+        for (let i=0; i<cant; i++){
+            let producto = generador.get();
+            producto.id = i +1;
+            productos.push(producto);         
+        }
+            productos.forEach( (e) => {
+                return e
+            })
+        cant == 0 ? res.send('No hay productos para mostrar') : res.send(productos);
+
+        /* res.send(`
+        <table>
+         <thead>
+          <tr>
+           <th>Title</th>
+           <th>Price</th>
+           <th>Image</th>
+          </tr>
+         </thead>
+         <tbody id="bodyy">
+         </tbody>
+        </table>
+        <script language="javascript">
+        let tabla = document.getElementById('bodyy');
+        let tbody = document.createElement('tbody');
+        let tr = document.createElement('tr');
+        tr.innerHTML += '<td>${e.title}</td> <td>${e.price}</td> <td><img src="${e.image}"></td>';
+        tbody.appendChild(tr);
+        tabla.appendChild(tbody);
+       </script>
+`); */
+    }
 };

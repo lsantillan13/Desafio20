@@ -9,6 +9,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs');
 
+/*FAKERJS*/
+
 /* Persistencia */
     /*Mongoose*/
     //  let mongoose = require('mongoose');

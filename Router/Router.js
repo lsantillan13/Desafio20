@@ -12,4 +12,6 @@ const rutas = new Rutas();
  router.put('/productos/actualizar/:id', rutas.actualizar);
  router.delete('/productos/borrar/:id', rutas.borrar);
  router.get('/productos/vista', rutas.vistas);
+ router.get('/productos/vista-test', rutas.faker);
+
    module.exports = router;
