@@ -1,9 +1,8 @@
-let arr = require('../server.js');
-const path = require('path');
-const fs = require('fs');
+const arr = require('../server.js');
 /*FAKERJS*/
 const generador = require('../faker/generator/faker.js');
 let id = 0;
+
 module.exports = class Rutas {
     constructor(id, productos) {}
     listar(req, res) {

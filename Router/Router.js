@@ -1,17 +1,37 @@
-/* Imports*/
-const express = require("express");
+//--------------------------------------------------------------------IMPORTS---------------------------------------------------------------------------------\\
+const express = require('express')
 const Rutas = require('../Rutas/Routes.js');
-
 const router = express.Router();
+const {
+  find,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} = require('../controllers/productos.controller.js');
+
+/*const {
+  getProducts,
+  createProduct,
+  updateProduct,
+  deleteProduct
+} = require ('../Rutas/Rutas.js');
+*/
 const rutas = new Rutas();
 
-/*Routes collection*/
- router.post('/productos/guardar', rutas.guardar);
- router.get('/productos/listar', rutas.listar);
- router.get('/productos/listar/:id', rutas.listarId);
- router.put('/productos/actualizar/:id', rutas.actualizar);
- router.delete('/productos/borrar/:id', rutas.borrar);
- router.get('/productos/vista', rutas.vistas);
- router.get('/productos/vista-test', rutas.faker);
+//--------------------------------------------------------------------Rutas-----------------------------------------------------------------------------------\\
+//-----------------/*CODE*/-----------------------------------------Productos-------------------------------------------/*Notes*/-----------------------------\\
+/**/ router                                                                                                                                                  /**/
+/**/ .get('/productos/vista', rutas.vistas)                                                                        // => UI de Productos                     /**/
+/**/ .post('/productos/guardar', function(req,res){createProduct})                                                 //  Create                                /**/
+/**/ .get('/productos/listar', function(req,res){find})                                                     //  Read                                  /**/
+/**/ .get('/productos/listar/:id', function(req,res){getProducts})                                                 //  Read                                  /**/
+/**/ .put('/productos/actualizar/:id', function(req,res){updateProduct})                                           //  Update                                /**/
+/**/ .delete('/productos/borrar/:id', function(req,res){deleteProduct})                                            //  Delete                                /**/
 
-   module.exports = router;
+/**/ .get('/productos/vista-test', rutas.faker)                                                                    // => UI de Fakerjs                       /**/
+/**/                                                                                                                                                         /**/
+//-------------------------------------------------------------------Carrito----------------------------------------------------------------------------------\\
+/**/                                                                                                                                                         /**/
+/**/ //router.get('/carrito', ruta.funcion)                                                                        // => UI de Carrito                       /**/
+/**/ module.exports = router;                                                                                                                                /**/ 
+/**/                                                                                                                                                         /**/

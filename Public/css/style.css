@@ -18,9 +18,13 @@ li{color: #fff;}
 /*ESTILOS PARA MI CHAT*/
 
 /*MENSAJES*/
+.chat__title{
+    text-align: center;
+    color: blue;
+}
  .notItalic{font-style: normal; color: brown;}
 p strong { color: blue;}
-p i{color: green;}
+p i{color: darkgreen;}
 
 body{
     font-family: sans-serif;
@@ -31,6 +35,7 @@ body{
     margin: 30px auto;
     border: 1px solid #ddd;
     box-shadow: 1px 3px 5px rgba(0.0.0 .5);
+    background: gray;
 }
 
 #chat-window{
@@ -49,26 +54,41 @@ body{
 
 #output p {
     color: #aaa;
-    padding: 14px 0;
+    padding: 14px 1px;
     margin: 0 20px;
-
+    display: flex;
 }
 
-#username, #message{
+.chat__avatar{
+    margin: 0 10px;
+    width: 50px;
+    display: flex;
+}
+
+.chat__controls{
+    display: flex;
+}
+#chat-container #message{
+    width: 100%;
+}
+#chat-container > input{
+    margin: 0 25px;
     padding: 10px 20px;
     box-sizing: border-box;
     border: 0;
     background: #eee;
-    display: block;
-    width: 100%;
+    display: flex;
+    width: 350px;
 }
+
+
 #button{
     background: #5753d8;
     color:  #fff;
     font-size: 18px;
     border: 0;
     padding: 12px 0;
-    width: 100%;
+    width: 25%;
     border-radius: 0 0 2px 2px;
 }
 /*ESTILOS DE LA LISTA DE PRODUCTOS*/

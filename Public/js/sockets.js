@@ -17,41 +17,47 @@ window.onload = function(){
      const deleteBtn = document.createElement('p'); deleteBtn.style.height = '100px';
      const img1 = '<p class="parrafo"> <img class="delete" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Remove_font_awesome.svg/512px-Remove_font_awesome.svg.png"> </p>';
     /* DOM Manipulation */
-    const first = document.getElementById('titleGuardar');
-    const second = document.getElementById('price');
-    const third = document.getElementById('thumbnail');
+    const name = document.getElementById('titleGuardar');
+    const price = document.getElementById('price');
+    const image = document.getElementById('thumbnail');
+    const description = document.getElementById('description');
+    const code = document.getElementById('Code');
+    const stock =  document.getElementById('Stock');
+
     const btn = document.getElementById('btn');
     const table = document.getElementById('myTable');
     /*Delete*/let deleteFn = () => {deleteBtn.addEventListener('click', function (){alert('DELETE')})}; deleteBtn == undefined ? null : deleteFn();
     /*Update*/ let updateFn = () => {updateBtn.addEventListener('click', function (){alert('UPDATE')})}; updateBtn == undefined ? null : updateFn(); 
     /*Event Handler*/
         /*Push de productos al UI*/
+        let productId = 0;
             btn.addEventListener('click', function () {
+                productId++
                 socket.emit('products:send', product = {
-                    title: first.value,
-                    price: second.value,
-                    image: third.value,
-                }) &&           
-                /*Productos literales*/ socket.emit('products:db', product = {
-                    title: first.value,
-                    price: second.value,
-                    image: third.value});
+                    name: name.value,
+                    description: description.value,
+                    code: code.value,
+                    stock: stock.value,
+                    price: price.value,
+                    image: image.value,
+                    id: productId,
+                });
+                // /*Productos literales*/ socket.emit('products:db', product = {
+                //     title: first.value,
+                //     price: second.value,
+                //     image: third.value});
             });
     /*KNEX*/
-    socket.on('products:receive', function (data){
-        const mapped = data.map((e) => e);
+    socket.on('products:resend', (data, data1) => {
+        const datos = data1;
     /*Inner*/
-        for ( i = 0; i <= data.length -1; a = 0){
-            tdName.innerHTML += `<p class="parrafo selected number-${i}"> ${mapped[i].title} </p>`
-            tdPrice.innerHTML += `<p class="parrafo selected number-${i}"> ${mapped[i].price} </p´>`
-            tdPicture.innerHTML += `<p class="parrafo selected number-${i}"> <img src="${mapped[i].image}" alt="image_of_${mapped[i].title}" class="product_image"/> </p>`;
-            tdId.innerHTML += `<p class="parrafo selected $numer-${i}">${mapped[i].id}</p>`
-            deleteBtn.innerHTML += `${img1}`;
-            updateBtn.innerHTML += `${img2}`;
-            tdOptions.innerHTML += `<p class="parrafo selected number-${i}"> ${deleteBtn} ${updateBtn} </p>`;
-            i++;
-            console.log(data.length);
-        };
+        tdName.innerHTML += `<p class="parrafo selected"> ${datos.name} </p>`
+        tdPrice.innerHTML += `<p class="parrafo selected"> ${datos.price} </p´>`
+        tdPicture.innerHTML += `<p class="parrafo selected"> <img src="${datos.image}" alt="image_of_${datos.name}" class="product_image"> </p>`;
+        tdId.innerHTML += `<p class="parrafo selected">${datos.id}</p>`
+        deleteBtn.innerHTML += `${img1}`;
+        updateBtn.innerHTML += `${img2}`;
+        tdOptions.innerHTML += `<p class="parrafo selected"> ${deleteBtn} ${updateBtn} </p>`;
         //
         for (product in data){
             const tr = document.createElement('tr');
@@ -64,57 +70,80 @@ window.onload = function(){
             tr.appendChild(deleteBtn);
             tr.appendChild(updateBtn)
             table.appendChild(tb);
-        }        
+        }
     });
      
-/****************************************************************************************************************************************************************/
-                                                                        /*Chat*/
-    const output = document.getElementById('output');
-    const actions = document.getElementById('actions');
-    const username = document.getElementById('username');
-    const message = document.getElementById('message');
+/*****************************************************************************//*Chat*//************************************************************************/                              
+    /*Message content*/
+    const output = document.getElementById('output');                   // Msg output
+    const actions = document.getElementById('actions');                 // @User is writing...
+    /*User info*/
+    const userEmail = document.getElementById('username');                  // Mensaje = {author:{ id: 'mail'}};
+    const userUsername = document.getElementById('name');
+    const userSurname = document.getElementById('surname');                   
+    const userAge = document.getElementById('age');
+    const userNick = document.getElementById('nick');
+    const userAvatar = document.getElementById('avatar');
+    const userMessage = document.getElementById('message');                 // Mensaje = {Text:{'mensaje'}}
+    /*Send message button*/
     const myBtn = document.getElementById('button');
-/*User: está escribiendo...*/
-message.addEventListener('keypress', function () { socket.emit('chat:typing', username.value);});
-    /*FECHA Y HORA*/
-     const timeNow = new Date();
-        function getHour(){
-         const hours = timeNow.getHours().toString().length < 2 ? "0" + timeNow.getHours() : timeNow.getHours();
-         const minutes = timeNow.getMinutes().toString().length < 2 ? "0" + timeNow.getMinutes() : timeNow.getMinutes();
-         const secs =  timeNow.getSeconds().toString().length < 2 ? "0" + timeNow.getSeconds() :  timeNow.getSeconds();
-         let mainTime = `${hours}:${minutes}:${secs}`;
-        return mainTime;
+    /*User: está escribiendo...*/
+userMessage.addEventListener('keypress', () => { socket.emit('chat:typing', userEmail.value);});
+    let newDate = () => { return new Date();};
+     /*FECHA Y HORA*/
+     let getTheDate = () => {
+         /*Time*/
+        let hours = newDate().getHours().toString().length < 2 ? "0" + newDate().getHours() : newDate().getHours();
+        let minutes = newDate().getMinutes().toString().length < 2 ? "0" + newDate().getMinutes() : newDate().getMinutes();
+        let secs =  newDate().getSeconds().toString().length < 2 ? "0" + newDate().getSeconds() :  newDate().getSeconds();
+        let mainTime = `${hours}:${minutes}:${secs}`;
+         /*Date*/
+        let month = newDate().getMonth();
+        let days = newDate().getDate();
+        let year = newDate().getFullYear();
+        let mainDate = `${days}/${month}/${year}`;
+        let theWholeThing = ` [${mainDate} ${mainTime}]: `
+         return theWholeThing;
      };
-     function getDate(){
-        const month = timeNow.getMonth();
-        const days = timeNow.getDate();
-        const year = timeNow.getFullYear();
-        const mainDate = `${days}/${month}/${year}`;
-     }
-    /* Mensaje */
-     let fechaActual  = new Date();
-     const dateMsg = ` ${fechaActual.getDate()}/${fechaActual.getMonth()}/${fechaActual.getFullYear()}`;   
-     socket.on('message:send', function (data){
-        actions.innerHTML = ``;
-        output.innerHTML += `<p> <strong>${data.mail}</strong> <i class="notItalic">[${dateMsg} ${getHour()}]</i> : <i>${data.message}</i> </p>`;
-     });
 
-    /*Primer formulario*/
-    myBtn.addEventListener('click', function(){
+/*Primer formulario*/
+    myBtn.addEventListener('click', () => {
     /*Message Insert*/
      socket.emit("message:insert", obj={
       message: message.value,
        mail: username.value,
-        fecha: `[${dateMsg} ${getHour()}]`});
-     /*Message Read*/
+        fecha: `${getTheDate()}`});
+    
+    /*Message Read*/
      socket.emit("message:read", true);
-     /*Message Update*/
+    /*Message Update*/
      socket.emit("message:update", true);
-     /*Message Dlete*/
+    /*Message Dlete*/
      socket.emit("message:delete", true);
-    })
+
+     socket.emit('datos', mensaje = {
+        id: '1000',
+        author: {
+          id: userEmail.value,
+          nombre: userUsername.value,
+          apellido: userSurname.value,
+          edad: userAge.value,
+          alias: userNick.value,
+          avatar: userAvatar.value,
+        },
+        text: userMessage.value},
+        );
+    });
+
+    /* Mensaje */    
+    socket.on('message:send', (data) => {
+        actions.innerHTML = ``;
+        output.innerHTML += `<p> <strong>${data.mail }</strong> <i class="notItalic"> ${ getTheDate() } </i>  <i> ${ data.message } </i> <img class="chat__avatar" src="${avatar}"></p>`;
+     });
+    
     /*User: está escribiendo...*/
-    socket.on('chat:typing', (data) => {
+    socket.on('chat:typeado', (data) => {
+        data === '' ? data = 'Usuario' : data = data;
         actions.innerHTML = `<p> <em>${data} está escribiendo...</em> </p>`
     });    
 };
