@@ -16,14 +16,24 @@
 </head>
 
 <body>
-    
+    <div class="container logDiv">
+
+    <div class="container notloggedin">
+    <h3>Login</h3>
+    <input type="text" placeholder="Enter Username" id="login">
+    <button id="loginBtn"> <a href="/loggedIn">Login</a></button>
+    </div>
+    {{!-- <h2>Bienvenido Lautaro</h2>
+        <button>Logout</button> --}}
+    </div>
   <main class="container-fluid">
+    
   <section class="container">
 
 {{!-- FORM  --}}
 
 <form method="post" action="/api/productos/guardar" class="container formulario" target="hiddenFrame">
-    <h1>Nuevo Productos</h1>
+    <h1>Ingrese Producto</h1>
         <div class="formGroup">
             <label for="titleGuardar">Nombre</label>
             <input type="text" id="titleGuardar" name="title">

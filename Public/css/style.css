@@ -7,7 +7,7 @@ section { width: 100%; height: 100%; background: #fff; text-align: center; color
                 .formGroup{margin-top: 10px;}
                     label{ left: 40%; width: max-content; font-size: 1.2em; position: relative; display: flex;}
                         #titleGuardar, #price, #thumbnail{width: 20%; height: 35px; position: relative;}
-                        .product_image{width: 45px} main{background-color: #000;}
+                        .product_image{width: 45px} main{background-color: #fff;}
                     th{font-size: 1.4em; color: #fff; font-weight: 900;}
                 .product-list{ height: 600px; background-color: red;}
             td{position: relative; font-size: 1.5em; color: #fff; text-align: center;}
@@ -20,7 +20,7 @@ li{color: #fff;}
 /*MENSAJES*/
 .chat__title{
     text-align: center;
-    color: blue;
+    color: #fff;
 }
  .notItalic{font-style: normal; color: brown;}
 p strong { color: blue;}
@@ -35,7 +35,7 @@ body{
     margin: 30px auto;
     border: 1px solid #ddd;
     box-shadow: 1px 3px 5px rgba(0.0.0 .5);
-    background: gray;
+    background:#263238;
 }
 
 #chat-window{
@@ -117,4 +117,49 @@ body{
     width: 60px;
     height: 50px;
     background: transparent;
+}
+
+
+/*NAV*/
+.logDiv{
+    display: flex;
+    text-align: center;
+    background: #263238;
+    width: 100%;
+    height: 85px;
+    margin: 15px 100px;
+}
+.logDiv h2{
+    color: #fff;
+    top: 0;
+    left: -300px;
+    position: relative;
+    margin: auto;
+}
+.logDiv button{
+    background: lightgoldenrodyellow;
+    top: 43%;
+    left: -570px;
+    position: relative;
+    width: 125px;
+    height: 30px;
+}
+
+#login{
+    width: auto;
+    height: 30px;
+    top: 10%;
+    position: relative;
+    left: -380px;
+    margin: auto;
+}
+.notloggedin {
+    display: flex;
+}
+
+.notloggedin  h3{
+    position: relative;
+    top: 5%;
+    margin: auto;
+    color: #000;
 }

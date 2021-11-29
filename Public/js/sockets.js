@@ -2,6 +2,13 @@
 const socket = io.connect('http://localhost:8080');
 /*When document.ready*/
 window.onload = function(){
+    /*Login*/
+    const button = document.getElementById('loginBtn');
+    const userLogin = document.getElementById('login')
+    button.addEventListener('click', () => {
+        socket.emit('login:data', userLogin.value);
+    })
+    
     /*Creation*/
      const tb = document.createElement('tbody');
      const tdName = document.createElement('td');
@@ -145,5 +152,6 @@ userMessage.addEventListener('keypress', () => { socket.emit('chat:typing', user
     socket.on('chat:typeado', (data) => {
         data === '' ? data = 'Usuario' : data = data;
         actions.innerHTML = `<p> <em>${data} está escribiendo...</em> </p>`
-    });    
+    });
+
 };
