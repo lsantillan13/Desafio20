@@ -2,12 +2,12 @@
 const express = require('express')
 const Rutas = require('../Rutas/Routes.js');
 const router = express.Router();
-const {
-  find,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-} = require('../controllers/productos.controller.js');
+// const {
+//   find,
+//   createProduct,
+//   updateProduct,
+//   deleteProduct,
+// } = require('../controllers/productos.controller.js');
 
 /*const {
   getProducts,
